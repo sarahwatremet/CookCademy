@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @AppStorage("hideOptionalSteps") private var hideOptionalSteps: Bool = false
+    @StateObject var recipeData = RecipeData()
     
     @Binding var recipe: Recipe
     
@@ -87,6 +88,9 @@ struct RecipeDetailView: View {
                         ToolbarItem(placement: .navigationBarLeading) { Text("") }
                     }
                 .navigationTitle("Edit Recipe")
+            }
+            .onDisappear {
+                recipeData.saveRecipes()
             }
         }
     }
